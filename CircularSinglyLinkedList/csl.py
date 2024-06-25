@@ -14,6 +14,8 @@ class CircularLinkedList:
         currentNode = self.head
         linkedList = ''
         headCount = 1
+        if(self.length == 0):
+            return 'Linked List Is Empty'
         # Iterate though the list 
         while currentNode:
             # if the current node is the head add a different string
@@ -33,7 +35,7 @@ class CircularLinkedList:
         return linkedList
     
     def append(self,value):
-        #Create a new node
+        # Create a new node
         newNode = Node(value)
         # Check if the head is None:
         if(self.head is None):
@@ -46,8 +48,22 @@ class CircularLinkedList:
         self.tail.next = self.head
         self.length += 1
 
+    def prepend(self,value):
+        # Create a new node
+        newNode = Node(value)
+
+        # Check if the head is None:
+        if(self.head is None):
+            self.head = newNode
+            self.tail = newNode
+        else:
+            newNode.next = self.head
+            self.head = newNode
+        self.tail.next = newNode
+        self.length += 1
+
 myLinkedList = CircularLinkedList()
-myLinkedList.append(5)
-print(myLinkedList.tail.next.value)
-myLinkedList.append(7)
+myLinkedList.prepend(5)
+myLinkedList.prepend(10)
+myLinkedList.prepend(90)
 print(myLinkedList)
