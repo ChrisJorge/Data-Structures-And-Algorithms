@@ -63,28 +63,53 @@ class CircularLinkedList:
         self.length += 1
 
     def insert(self,index,value):
-        if(index > self.length ):
+        # if index is invalid return invalid index
+        if(index > self.length or index < 0):
             return 'Invalid Index'
+        # if the index is 0 append to the front of linked list
         elif(index == 0):
             return self.prepend(value)
+        # If the index is at the end append to the linked list
         elif(index == self.length):
             return self.append(value)
         else:
             currentIndex = 0
             currentNode = self.head
+            # while the current node is valid and the index is less than the specified index - 1
             while currentIndex < index - 1 and currentNode:
+                # increment the current node
                 currentNode = currentNode.next
+                # increase the currentIndex by 1
                 currentIndex += 1
             newNode = Node(value)
+            # create a temp node to keep connection to rest of linked list
             temp = currentNode.next
+            # set the current nodes next to the new node
             currentNode.next = newNode
+            # make the new nodes next the temp node
             newNode.next = temp
+            # increase the length by 1
             self.length += 1
+
+    def search(self, target):
+        currentNode = self.head
+        # iterate through the nodes
+        while currentNode:
+            # if the value is in the linked list return true
+            if(currentNode.value == target):
+                return True
+            # if the current node isnt the value iterate to the next node
+            currentNode = currentNode.next
+            # if the head is reached again the whole linked list has been checked, return false
+            if(currentNode == self.head):
+                return False
+
 
 myLinkedList = CircularLinkedList()
 myLinkedList.prepend(5)
 myLinkedList.prepend(10)
 myLinkedList.prepend(90)
 myLinkedList.prepend(92)
-myLinkedList.insert(4, 3)
+print(myLinkedList.search(2))
+print(myLinkedList.search(92))
 print(myLinkedList)
