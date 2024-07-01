@@ -63,11 +63,11 @@ class CircularLinkedList:
         self.length += 1
 
     def insert(self,index,value):
-        if(index > self.length - 1):
+        if(index > self.length ):
             return 'Invalid Index'
         elif(index == 0):
             return self.prepend(value)
-        elif(index == self.length - 1):
+        elif(index == self.length):
             return self.append(value)
         else:
             currentIndex = 0
@@ -85,5 +85,6 @@ myLinkedList = CircularLinkedList()
 myLinkedList.prepend(5)
 myLinkedList.prepend(10)
 myLinkedList.prepend(90)
-myLinkedList.insert(1, 3)
+myLinkedList.prepend(92)
+myLinkedList.insert(4, 3)
 print(myLinkedList)
