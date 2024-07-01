@@ -104,12 +104,32 @@ class CircularLinkedList:
             if(currentNode == self.head):
                 return False
 
+    def get(self,index):
+        # Check if index is valid
+        if(index > self.length - 1 or index < 0):
+            return 'Invalid Index'
+        # Check if index is head
+        elif(index == 0):
+            return self.head.value
+        elif(index == self.length - 1):
+            return self.tail.value
+        else:
+            currentNode = self.head
+            # iterate through until the index
+            for _ in range(index):
+                currentNode = currentNode.next
+            # Return the value
+            return currentNode.value
 
 myLinkedList = CircularLinkedList()
 myLinkedList.prepend(5)
 myLinkedList.prepend(10)
 myLinkedList.prepend(90)
 myLinkedList.prepend(92)
-print(myLinkedList.search(2))
-print(myLinkedList.search(92))
+myLinkedList.append(9)
+myLinkedList.append(10)
+myLinkedList.append(11)
 print(myLinkedList)
+print(myLinkedList.get(0))
+print(myLinkedList.get(3))
+print(myLinkedList.get(5))
