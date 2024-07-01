@@ -62,8 +62,28 @@ class CircularLinkedList:
         self.tail.next = newNode
         self.length += 1
 
+    def insert(self,index,value):
+        if(index > self.length - 1):
+            return 'Invalid Index'
+        elif(index == 0):
+            return self.prepend(value)
+        elif(index == self.length - 1):
+            return self.append(value)
+        else:
+            currentIndex = 0
+            currentNode = self.head
+            while currentIndex < index - 1 and currentNode:
+                currentNode = currentNode.next
+                currentIndex += 1
+            newNode = Node(value)
+            temp = currentNode.next
+            currentNode.next = newNode
+            newNode.next = temp
+            self.length += 1
+
 myLinkedList = CircularLinkedList()
 myLinkedList.prepend(5)
 myLinkedList.prepend(10)
 myLinkedList.prepend(90)
+myLinkedList.insert(1, 3)
 print(myLinkedList)
