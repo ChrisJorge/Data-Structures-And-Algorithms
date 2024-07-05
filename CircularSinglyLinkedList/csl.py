@@ -209,6 +209,12 @@ class CircularLinkedList:
             # Decrease length by 1
             self.length -= 1
             return poppedNode.value
+    
+    def deleteLinkedList(self):
+        self.length = 0
+        self.head = None
+        self.tail = None
+        return True
 
 myLinkedList = CircularLinkedList()
 myLinkedList.prepend(5)
@@ -219,5 +225,5 @@ myLinkedList.append(9)
 myLinkedList.append(10)
 myLinkedList.append(11)
 print(myLinkedList)
-print(myLinkedList.remove(6))
+myLinkedList.deleteLinkedList()
 print(myLinkedList)
