@@ -120,6 +120,95 @@ class CircularLinkedList:
                 currentNode = currentNode.next
             # Return the value
             return currentNode.value
+    
+    def set(self,index,value):
+        # Check if index is valid
+        if(index > self.length - 1 or index < 0):
+            return 'Invalid Index'
+        # If the index is the head
+        elif(index == 0):
+            # Change the head value
+            self.head.value = value
+        # If the index is the tail
+        elif(index == self.length - 1):
+            # Change the tail value
+            self.tail.value = value
+        else:
+            currentNode = self.head
+            # Iterate through the linked list
+            for _ in range(index):
+                currentNode = currentNode.next
+            # Change the value
+            currentNode.value = value
+    
+    def popFirst(self):
+        poppedNode = self.head
+        #Check the length of linked list
+        if(self.length == 0):
+            # If length is zero linked list is empty
+            return 'Linked List Is Empty'
+        elif(self.length == 1):
+            # if length is 1 set head and tail to none
+            self.head = None
+            self.tail = None
+        elif(self.length == 2):
+            # if length is 2 set head to the next node and tail to the same node
+            self.head = self.head.next
+            self.tail = self.head
+            self.tail.next = self.head
+        else:
+            self.head = self.head.next
+            self.tail.next = self.head
+        # decrease the length by 1
+        self.length -= 1
+        return poppedNode.value
+    
+    def pop(self):
+        # Get the node to be removed
+        poppedNode = self.tail
+        # Check length of linked list
+        if(self.length == 0):
+            return 'Linked List Is Empty'
+        elif(self.length == 1):
+            self.head = None
+            self.tail = None
+        elif(self.length == 2):
+            self.tail = self.head
+            self.tail.next = self.head
+        else:
+            currentNode = self.head
+            # Iterate until one before the tail
+            for _ in range(self.length - 2):
+                currentNode = currentNode.next
+            self.tail = currentNode
+            self.tail.next = self.head
+        self.length -= 1
+        return poppedNode.value
+    
+    def remove(self,index):
+        # Check if length is valid
+        if(index > self.length - 1 or index < 0):
+            return 'Invalid Index'
+        # Check if index is head
+        if(index == 0):
+            return self.popFirst()
+        # Check if the index is the tail
+        elif(index == self.length - 1):
+            return self.pop()
+        else:
+            currentNode = self.head
+            # Iterate through linked list until 1 before the index to be removed
+            for _ in range(index - 1):
+                currentNode = currentNode.next
+            # Get the node to be removed
+            poppedNode = currentNode.next
+            # Skip over the popped Node
+            currentNode.next = currentNode.next.next
+            # make the poppedNodes next be none to severe the connection
+            poppedNode.next = None
+            # Decrease length by 1
+            self.length -= 1
+            return poppedNode.value
 
 myLinkedList = CircularLinkedList()
 myLinkedList.prepend(5)
@@ -130,6 +219,5 @@ myLinkedList.append(9)
 myLinkedList.append(10)
 myLinkedList.append(11)
 print(myLinkedList)
-print(myLinkedList.get(0))
-print(myLinkedList.get(3))
-print(myLinkedList.get(5))
+print(myLinkedList.remove(6))
+print(myLinkedList)
