@@ -75,16 +75,16 @@ class DoublyLinkedList:
             index = 0
             currentNode = self.head
             # Iterate through the linked list
-            for _ in range(self.length):
+            while currentNode:
                 # Check if the current nodes value is the target
                 if(currentNode.value == target):
-                    return True, index
+                    return index
                 else:
                     # Iterate the current node and increment index
                     currentNode = currentNode.next
                     index += 1
             # If the value is not inside of the linked list return false
-            return False
+            return -1
 
 myLinkedList = DoublyLinkedList()
 myLinkedList.append(5)
