@@ -90,12 +90,6 @@ class DoublyLinkedList:
         # Check if index is valid
         if (index < 0 or index > self.length - 1):
             return 'Invalid Index'
-        elif (index == 0):
-            # If index is the head return the head value
-            return self.head.value
-        elif (index == self.length - 1):
-            # If the index is the tail return the tail value
-            return self.tail.value
         else:
             # Check if index is in the first or second half of linked list
             if(index < self.length // 2):
@@ -110,7 +104,7 @@ class DoublyLinkedList:
                 for _ in range(self.length - 1, index, -1):
                     # Icrement to the previous node
                     currentNode = currentNode.prev
-            return currentNode.value
+            return currentNode
 
     def set(self,index,value):
         # Check if the index is valid
@@ -123,24 +117,13 @@ class DoublyLinkedList:
             # If index is the tail change the tails value
             self.tail.value = value
         else:
-            # Check if index is in the first or second half of linked list
-            if(index < self.length // 2):
-                # Iterate through the linked list until the specified index
-                currentNode = self.head
-                for _ in range(index):
-                    # Increment to the next node
-                    currentNode = currentNode.next
-            else:
-                currentNode = self.tail
-                # Iterate through the linked list until the specified index
-                for _ in range(self.length - 1, index, -1):
-                    # Icrement to the previous node
-                    currentNode = currentNode.prev
+            # Use the get method to get the node at the specified index
+            currentNode = self.get(index)
             # Change the nodes value
             currentNode.value = value
-            return True
-
-
+        return True
+    
+        
 myLinkedList = DoublyLinkedList()
 myLinkedList.append(5)
 myLinkedList.append(10)
