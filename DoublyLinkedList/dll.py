@@ -85,6 +85,61 @@ class DoublyLinkedList:
                     index += 1
             # If the value is not inside of the linked list return false
             return -1
+    
+    def get(self,index):
+        # Check if index is valid
+        if (index < 0 or index > self.length - 1):
+            return 'Invalid Index'
+        elif (index == 0):
+            # If index is the head return the head value
+            return self.head.value
+        elif (index == self.length - 1):
+            # If the index is the tail return the tail value
+            return self.tail.value
+        else:
+            # Check if index is in the first or second half of linked list
+            if(index < self.length // 2):
+                # Iterate through the linked list until the specified index
+                currentNode = self.head
+                for _ in range(index):
+                    # Increment to the next node
+                    currentNode = currentNode.next
+            else:
+                currentNode = self.tail
+                # Iterate through the linked list until the specified index
+                for _ in range(self.length - 1, index, -1):
+                    # Icrement to the previous node
+                    currentNode = currentNode.prev
+            return currentNode.value
+
+    def set(self,index,value):
+        # Check if the index is valid
+        if(index < 0 or index > self.length - 1):
+            return 'Invalid Index'
+        elif(index == 0):
+            # If index is the head change the heads value
+            self.head.value = value
+        elif(index == self.length - 1):
+            # If index is the tail change the tails value
+            self.tail.value = value
+        else:
+            # Check if index is in the first or second half of linked list
+            if(index < self.length // 2):
+                # Iterate through the linked list until the specified index
+                currentNode = self.head
+                for _ in range(index):
+                    # Increment to the next node
+                    currentNode = currentNode.next
+            else:
+                currentNode = self.tail
+                # Iterate through the linked list until the specified index
+                for _ in range(self.length - 1, index, -1):
+                    # Icrement to the previous node
+                    currentNode = currentNode.prev
+            # Change the nodes value
+            currentNode.value = value
+            return True
+
 
 myLinkedList = DoublyLinkedList()
 myLinkedList.append(5)
@@ -93,7 +148,8 @@ myLinkedList.append(105)
 myLinkedList.prepend(33)
 myLinkedList.prepend(3)
 print(myLinkedList)
-print(myLinkedList.search(3))
-print(myLinkedList.search(105))
-print(myLinkedList.search(5))
-print(myLinkedList.search(51))
+myLinkedList.set(0, 0)
+myLinkedList.set(2, 1)
+myLinkedList.set(4, 1000)
+print(myLinkedList.set(10, 30))
+print(myLinkedList)
