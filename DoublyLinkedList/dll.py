@@ -127,27 +127,64 @@ class DoublyLinkedList:
         # Check if index is valid
         if(index < 0 or index > self.length):
             return 'Invalid Index'
+        # if index is zero prepend the new node
         elif(index == 0):
             return self.prepend(value)
+        # if the index is the length of the linked list append
         elif(index == self.length):
             return self.append(value)
         else:
+            # Create a new node
             newNode = Node(value)
+            # get the node before
             currentNode = self.get(index - 1)
+            # set the newNodes next to the node at that current index
             newNode.next = currentNode.next
+            # set that nodes previous to the new node
             currentNode.next.prev = newNode
+            # make the newnodes previous the current node
             newNode.prev = currentNode
+            # set the current nodes next to the new node
             currentNode.next = newNode
+        # increase the length by 1
+        self.length += 1
+
+    def popFirst(self):
+        # Check to make sure the linked list has nodes
+        if(self.length == 0):
+            return 'LinkedList is empty'
+        elif(self.length == 1):
+            poppedNode = self.head
+            self.head = None
+            self.tail = None
+        elif(self.length == 2):
+            poppedNode = self.head
+            self.tail.prev = None
+            self.head = None
+            self.head = self.tail 
+        else:
+            poppedNode = self.head
+            self.head = self.head.next
+            poppedNode.next = None
+            self.head.prev = None
+        self.length -= 1
+        return poppedNode.value
+
 
 myLinkedList = DoublyLinkedList()
+print(myLinkedList.popFirst())
 myLinkedList.append(5)
+print(myLinkedList.popFirst())
 myLinkedList.append(10)
 myLinkedList.append(105)
+print(myLinkedList.popFirst())
+print(myLinkedList.head.value)
 myLinkedList.prepend(33)
 myLinkedList.prepend(3)
+print(myLinkedList.popFirst())
 print(myLinkedList)
-myLinkedList.insert(0,0)
-myLinkedList.insert(6,0)
-myLinkedList.insert(4,0)
-print(myLinkedList)
+# myLinkedList.insert(0,0)
+# myLinkedList.insert(6,0)
+# myLinkedList.insert(4,0)
+# print(myLinkedList)
 
