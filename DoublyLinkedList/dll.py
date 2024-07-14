@@ -193,20 +193,47 @@ class DoublyLinkedList:
         self.length -= 1
         # return the popped nodes value
         return poppedNode.value
+    
+    def remove(self,index):
+        # Check if the index is valid
+        if ( index < 0 or index > self.length - 1):
+            return 'Invalid Index'
+        # Check if the index is the head
+        elif (index == 0):
+            return self.popFirst()
+        # Check if the index is the tail
+        elif (index == self.length - 1):
+            return self.pop()
+        else:
+            # get the index to be removed
+            poppedNode = self.get(index)
+            nodeBefore = poppedNode.prev
+            nodeAfter = poppedNode.next
+            # create a connection from the node before and after the popped node
+            nodeBefore.next = nodeAfter
+            nodeAfter.prev = nodeBefore
+            # remove the connect the popped node has from the list
+            poppedNode.next = None
+            poppedNode.prev = None
+        # Decrease the length by 1    
+        self.length -= 1
+        # Return the popped nodes value
+        return poppedNode.value
+
+
 
 myLinkedList = DoublyLinkedList()
-print(myLinkedList.pop())
 myLinkedList.append(5)
-print(myLinkedList.pop())
 myLinkedList.append(10)
 myLinkedList.append(105)
 myLinkedList.prepend(33)
-print(myLinkedList.pop())
+myLinkedList.prepend(3)
+myLinkedList.insert(0,0)
+myLinkedList.insert(6,0)
+myLinkedList.insert(4,0)
 print(myLinkedList)
-# myLinkedList.prepend(3)
-# print(myLinkedList.popFirst())
-# myLinkedList.insert(0,0)
-# myLinkedList.insert(6,0)
-# myLinkedList.insert(4,0)
-# print(myLinkedList)
-
+print(myLinkedList.remove(0))
+print(myLinkedList.remove(6))
+print(myLinkedList.remove(3))
+print(myLinkedList.remove(30))
+print(myLinkedList)
