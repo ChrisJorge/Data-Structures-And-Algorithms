@@ -220,8 +220,6 @@ class DoublyLinkedList:
         # Return the popped nodes value
         return poppedNode.value
 
-
-
 myLinkedList = DoublyLinkedList()
 myLinkedList.append(5)
 myLinkedList.append(10)
