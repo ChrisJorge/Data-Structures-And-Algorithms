@@ -170,19 +170,41 @@ class DoublyLinkedList:
         self.length -= 1
         return poppedNode.value
 
+    def pop(self):
+        # Check to make sure the linked list has nodes
+        if(self.length == 0):
+            return 'LinkedList is empty'
+        # Check if the linked list has a length of 1
+        elif(self.length == 1):
+            # assign the popped node to the head
+            poppedNode = self.head
+            # make the head and tail pointers point to none
+            self.head = None
+            self.tail = None
+        else:
+            # assign the popped node to the tail
+            poppedNode = self.tail 
+            # make the new tail one before the tail
+            self.tail = self.tail.prev
+            # remove the connection from the old tail and the rest of the linked list
+            self.tail.next = None
+            poppedNode.prev = None
+        # decrease length by 1
+        self.length -= 1
+        # return the popped nodes value
+        return poppedNode.value
 
 myLinkedList = DoublyLinkedList()
-print(myLinkedList.popFirst())
+print(myLinkedList.pop())
 myLinkedList.append(5)
-print(myLinkedList.popFirst())
+print(myLinkedList.pop())
 myLinkedList.append(10)
 myLinkedList.append(105)
-print(myLinkedList.popFirst())
-print(myLinkedList.head.value)
 myLinkedList.prepend(33)
-myLinkedList.prepend(3)
-print(myLinkedList.popFirst())
+print(myLinkedList.pop())
 print(myLinkedList)
+# myLinkedList.prepend(3)
+# print(myLinkedList.popFirst())
 # myLinkedList.insert(0,0)
 # myLinkedList.insert(6,0)
 # myLinkedList.insert(4,0)
