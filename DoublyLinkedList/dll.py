@@ -123,7 +123,22 @@ class DoublyLinkedList:
             currentNode.value = value
         return True
     
-        
+    def insert(self,index,value):
+        # Check if index is valid
+        if(index < 0 or index > self.length):
+            return 'Invalid Index'
+        elif(index == 0):
+            return self.prepend(value)
+        elif(index == self.length):
+            return self.append(value)
+        else:
+            newNode = Node(value)
+            currentNode = self.get(index - 1)
+            newNode.next = currentNode.next
+            currentNode.next.prev = newNode
+            newNode.prev = currentNode
+            currentNode.next = newNode
+
 myLinkedList = DoublyLinkedList()
 myLinkedList.append(5)
 myLinkedList.append(10)
@@ -131,8 +146,8 @@ myLinkedList.append(105)
 myLinkedList.prepend(33)
 myLinkedList.prepend(3)
 print(myLinkedList)
-myLinkedList.set(0, 0)
-myLinkedList.set(2, 1)
-myLinkedList.set(4, 1000)
-print(myLinkedList.set(10, 30))
+myLinkedList.insert(0,0)
+myLinkedList.insert(6,0)
+myLinkedList.insert(4,0)
 print(myLinkedList)
+
