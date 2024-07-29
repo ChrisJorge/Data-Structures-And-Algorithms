@@ -1,3 +1,46 @@
+class Node:
+    def __init__(self,value = None):
+        self.value = value
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+
+
+class Queue:
+    def __init__(self):
+        self.LinkedList = LinkedList()
+
+    def isEmpty(self):
+        if(self.LinkedList.head == None):
+            return True
+        else:
+            return False
+        
+    def enqueue(self, value):
+        newNode = Node(value)
+        if (self.isEmpty()):
+            self.LinkedList.head = newNode
+            self.LinkedList.tail = newNode
+        else:
+            self.LinkedList.tail.next = newNode
+            self.LinkedList.tail = newNode
+
+    def dequeue(self):
+        if(self.isEmpty()):
+            return 'Queue is empty'
+        else:
+            currentNode = self.LinkedList.head
+            if(self.LinkedList.head == self.LinkedList.tail):
+                self.LinkedList.head = None
+                self.LinkedList.tail = None
+            else:
+                self.LinkedList.head = currentNode.next
+            return currentNode
+
 class TreeNode:
     # Initialize  left, right, and value
     def __init__(self, data = None):
@@ -50,4 +93,19 @@ def postOrderTraversal(root):
         # Recursively call postOrdrTraversal for the right
     postOrderTraversal(root.right)
     print(root.data)
-postOrderTraversal(BinaryTree)
+
+def levelOrderTraversal(root):
+    if not root:
+        return 
+    else:
+        queue = Queue()
+        queue.enqueue(root)
+        while not queue.isEmpty():
+            root = queue.dequeue()
+            print(root.value.data)
+            if(root.value.left is not None):
+                queue.enqueue(root.value.left)
+            if(root.value.right is not None):
+                queue.enqueue(root.value.right)
+
+levelOrderTraversal(BinaryTree)
